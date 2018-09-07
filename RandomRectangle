@@ -1,0 +1,47 @@
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+#include <ctime>
+
+int X1;
+int Y1;
+int X2;
+int Y2;
+int R;
+int G;
+int B;
+
+int main() {
+
+	srand(time(NULL));
+	al_init();
+	al_init_primitives_addon();
+
+	ALLEGRO_DISPLAY *display = NULL;
+
+	display = al_create_display(900, 900);
+
+	al_clear_to_color(al_map_rgb(0, 0, 0));
+
+	while (true) {
+
+		X1 = rand()%900;
+		Y1 = rand()%900;
+		X2 = rand() % 900;
+		Y2 = rand() % 900;
+
+		R = rand() % 200;
+		G = rand() % 200; 
+		B = rand() % 200;
+
+		al_draw_filled_rectangle(X1, Y1, X2, Y2, al_map_rgb(R, G, B));
+		
+
+		al_flip_display();
+
+		al_rest(1);
+
+	}
+	al_destroy_display(display);
+	return 0;
+
+}
