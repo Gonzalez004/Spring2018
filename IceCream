@@ -1,0 +1,183 @@
+//Libary
+#include <iostream>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+#include <ctime>
+
+using namespace std;
+//Screen Size
+const int Screen_H = 900;
+const int Screen_W = 1800;
+//Circle1
+int R1;
+int X1;
+int Y1;
+//Circle2
+int R2;
+int X2;
+int Y2;
+//Circle3
+int R3;
+int X3;
+int Y3;
+//Cone
+int TriX1;
+int TriY1;
+int TriX2;
+int TriY2;
+int TriX3;
+int TriY3;
+
+
+//Random Number////////////
+//Circle3
+int C1;
+int C2;
+int C3;
+//Circle2
+int C4;
+int C5;
+int C6;
+//Circle1
+int C7;
+int C8;
+int C9;
+//RandomTriColor
+int C10;
+int C11;
+int C12;
+
+//////////////////X & Y/////////
+//here's the bouncer's x and y coordinates on the screen, initally set to 30,30
+	float Bouncer_X = 800;
+	float Bouncer_Y = 800;
+
+	//here's the bouncer's x and y directions, initially set to -4, 4
+	float Bouncer_dX = -4.0;
+	float Bouncer_dY = 4.0;
+	
+	
+
+int main() {
+
+	ALLEGRO_DISPLAY *GameWindow = NULL;
+	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
+	ALLEGRO_TIMER *timer = NULL;
+	srand(time(NULL));
+	al_init();
+	al_init_primitives_addon();
+	bool redraw = true;
+	
+	al_set_window_position(GameWindow, 100, 100); //Positions Widnow on Screen
+	
+	al_set_window_title(GameWindow, "Ferny's Game"); //Window Title
+	GameWindow = al_create_display(Screen_W, Screen_H);
+	timer = al_create_timer(.02);
+	event_queue = al_create_event_queue();
+
+	al_register_event_source(event_queue, al_get_display_event_source(GameWindow));
+	al_register_event_source(event_queue, al_get_timer_event_source(timer));
+	
+	al_clear_to_color(al_map_rgb(0, 0, 0));
+
+	al_flip_display();
+
+	al_start_timer(timer);
+
+	while (true) {
+		ALLEGRO_EVENT ev;
+		al_wait_for_event(event_queue, &ev);
+
+		if (ev.type == ALLEGRO_EVENT_TIMER) {
+			//if the box hits the left wall OR the right wall
+			if (Bouncer_X < 100 || Bouncer_X > Screen_W - 100) {
+				//flip the x direction
+				Bouncer_dX = -Bouncer_dX;
+			}
+			
+			//if the box hits the top wall OR the bottom wall
+			if (Bouncer_Y < 630 || Bouncer_Y > Screen_H - 0) {
+				//flip the y direction
+				Bouncer_dY = -Bouncer_dY;
+			}
+			
+
+			//really important code!
+			//move the box in a diagonal
+			Bouncer_X += Bouncer_dX;
+			Bouncer_Y += Bouncer_dY;
+
+			//if an event happened, you better redraw
+			redraw = true;
+		}
+
+		//////////////////////////////////////////////////////////////////
+		//kill program if the user clicks the exit button
+		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+			break;
+		}
+
+
+		if (redraw && al_is_event_queue_empty(event_queue)) {
+			redraw = false;
+			//al_clear_to_color(al_map_rgb(0, 0, 0));
+			//////////////////////////////////////////////////
+			C1 = rand() % 100 + 100;
+			C2 = rand() % 100 + 100;
+			C3 = rand() % 100 + 100;
+
+			C4 = rand() % 100 + 100;
+			C5 = rand() % 100 + 100;
+			C6 = rand() % 100 + 100;
+
+			C7 = rand() % 100 + 100;
+			C8 = rand() % 100 + 100;
+			C9 = rand() % 100 + 100;
+
+			C10 = rand() % 100;
+			C11 = rand() % 100;
+			C12 = rand() % 100;
+
+			//////////////////////////////////////////////////
+		//	TriX3 = rand() % 1800;
+			//TriY3 = rand() % 900;
+
+			//TriX3 = 270;
+			//	TriY3 = 800;
+
+			TriX3 = Bouncer_X;
+			TriY3 = Bouncer_Y;
+
+			TriX1 = TriX3 - 100; //170
+			TriY1 = TriY3 - 300; //500;
+
+			TriX2 = TriX3 + 100; //370;
+			TriY2 = TriY3 - 300; //500;
+			///////////////////////////////////////////////////////
+			R1 = 100;
+			X1 = TriX3; //270;
+			Y1 = TriY3 - 325; //475;
+
+			R2 = 100;
+			X2 = TriX3; //270;
+			Y2 = Y1 - 100; //375;
+
+			R3 = 100;
+			X3 = TriX3;
+			Y3 = Y2 - 100;
+
+			al_draw_filled_circle(X3, Y3, R3, al_map_rgb(C1, C2, C3)); //Blue (0, 0, 100)
+			al_draw_filled_circle(X2, Y2, R2, al_map_rgb(C4, C5, C6)); //White
+			al_draw_filled_circle(X1, Y1, R1, al_map_rgb(C7, C8, C9)); //Green (0, 100, 0)
+
+
+			al_draw_filled_triangle(TriX1, TriY1, TriX2, TriY2, TriX3, TriY3, al_map_rgb(C10, C11, C12));
+			al_flip_display();
+			cout << Bouncer_X << ", " << Bouncer_Y << endl;
+			//al_rest(0.5);
+		}
+	}
+	al_destroy_display(GameWindow);
+
+	return 0;
+}
