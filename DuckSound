@@ -1,0 +1,28 @@
+#include <iostream>
+#include <Windows.h>
+#include <stdlib.h>
+using namespace std;
+
+char input;
+
+int main() {
+	cout << "Ducky" << endl;
+	cout << "Are you a Duck?" << endl;
+
+	cin >> input;
+
+	switch (input) {
+	case 'Y':
+		PlaySound(TEXT("Duck.wav"), NULL, SND_FILENAME);
+		break;
+	case 'N':
+		
+		break;
+	case 'y':
+		PlaySound(TEXT("YouNameIt.wav"), NULL, SND_FILENAME); 
+		break;
+	case 'n':
+		PlaySound(TEXT("Zapateado_Encabronado_-_Alacranes.wav"), NULL, SND_FILENAME); //Saxphone
+	}
+	return 0;
+}
