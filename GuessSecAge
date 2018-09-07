@@ -1,0 +1,23 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	int bday;
+	int year;
+	int age;
+	int month;
+	double sec;
+
+	cout << "What Year is your bday?" << endl;
+		cin >> year;
+		age = 2018 - year;
+		sec = age * 1632960000;
+	cout << "What's your birthday day?" << endl;
+		cin >> bday;
+		sec = age * 5184000;
+	cout << "What is your birth month number?" << endl;
+		cin >> month;
+		sec = month * 155520000;
+	cout << sec << endl;
+}
