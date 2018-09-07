@@ -1,0 +1,48 @@
+#include <iostream>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+using namespace std;
+
+const int Screen_H = 640;
+const int Screen_W = 540;
+
+int R1 = 95;
+int X1 = 320;
+int Y1 = 255;
+
+int R2 = 100;
+int X2 = 320;
+int Y2 = 275;
+
+int R3 = 95;
+int X3 = 320;
+int Y3 = 275;
+
+int R4 = 100;
+int X4 = 320;
+int Y4 = 255;
+
+int main() {
+
+	ALLEGRO_DISPLAY *display = NULL;
+
+	al_init();
+	al_init_primitives_addon();
+
+	display = al_create_display(Screen_H, Screen_W);
+
+		al_clear_to_color(al_map_rgb(0, 0, 0));
+	
+		
+		al_draw_filled_circle(X2, Y2, R2, al_map_rgb(225, 225, 225)); //White
+		al_draw_filled_circle(X3, Y3, R3, al_map_rgb(0, 0, 0)); //Black
+		al_draw_filled_circle(X4, Y4, R4, al_map_rgb(225, 225, 225)); //White
+		al_draw_filled_circle(X1, Y1, R1, al_map_rgb(120, 0, 0)); //Red
+		al_flip_display();
+
+		al_rest(5.0);
+	
+	al_destroy_display(display);
+
+	return 0;
+}
