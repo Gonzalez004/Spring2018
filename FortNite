@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int AbilityDamage;
+int BaseValue;
+int HeroModifier;
+int Tech;
+
+int main() {
+
+	cout << "BV?" << endl;
+	cin >> BaseValue;
+	cout << "HM?" << endl;
+	cin >> HeroModifier;
+	cout << "T?" << endl;
+	cin >> Tech;
+
+	AbilityDamage = (BaseValue * HeroModifier) * Tech + (BaseValue * HeroModifier);
+	cout << "AD = " << AbilityDamage << endl;
+	system("pause");
+	//hi fernando, peter was here
+	return 0;
+}
