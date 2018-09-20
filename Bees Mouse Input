@@ -1,0 +1,183 @@
+#include <stdio.h>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+#include <ctime>
+#include <iostream>
+using namespace std;
+ 
+const float FPS = 60;
+const int SCREEN_W = 640;
+const int SCREEN_H = 480;
+const int BOUNCER_SIZE = 32;
+class Bees {
+public:
+	void Draw1();
+	void Draw2();
+	void Draw3();
+	void Draw4();
+	void InitCircle(int X, int Y, int Rad, int R, int G, int B);
+	void KeepTrack(int MouseX, int MouseY);
+private:
+	int Radius;
+	int ColorR;
+	int ColorB;
+	int ColorG;
+	int Xpos;
+	int Ypos;
+	int MX;
+	int MY;
+};
+ 
+int main() {
+
+
+	Bees Bee1;
+	Bees Bee2;
+	Bees Bee3;
+	Bees Bee4;
+	//Circle1.InitCircle(x, y, radius, red, green,blue);
+	Bee1.InitCircle(0, 0, 10, 255, 255, 0);
+	Bee2.InitCircle(0, 0, 10, 255, 255, 153);
+	Bee3.InitCircle(0, 0, 10, 204, 204, 0);
+	Bee4.InitCircle(0, 0, 10, 255, 255, 102);
+
+   srand(time(NULL));
+   ALLEGRO_DISPLAY *display = NULL;
+   ALLEGRO_EVENT_QUEUE *event_queue = NULL;
+   ALLEGRO_TIMER *timer = NULL;
+   ALLEGRO_BITMAP *bouncer = NULL;
+   float bouncer_x = SCREEN_W / 2.0 - BOUNCER_SIZE / 2.0;
+   float bouncer_y = SCREEN_H / 2.0 - BOUNCER_SIZE / 2.0;
+   bool redraw = true;
+
+   al_init();
+   al_init_primitives_addon();
+   al_install_mouse();
+
+  
+
+   timer = al_create_timer(1.0 / FPS);
+   display = al_create_display(SCREEN_W, SCREEN_H);
+   bouncer = al_create_bitmap(BOUNCER_SIZE, BOUNCER_SIZE);
+   al_set_target_bitmap(bouncer);
+   al_clear_to_color(al_map_rgb(255, 0, 255));
+ 
+
+   al_set_target_bitmap(al_get_backbuffer(display));
+ 
+   event_queue = al_create_event_queue();
+
+ 
+   al_register_event_source(event_queue, al_get_display_event_source(display));
+   al_register_event_source(event_queue, al_get_timer_event_source(timer));
+   al_register_event_source(event_queue, al_get_mouse_event_source());
+   al_clear_to_color(al_map_rgb(0,0,0));
+
+   al_flip_display();
+ 
+   al_start_timer(timer);
+
+   while(1) {
+	   
+	
+
+      ALLEGRO_EVENT ev;
+      al_wait_for_event(event_queue, &ev);
+ 
+      if(ev.type == ALLEGRO_EVENT_TIMER) {
+         redraw = true;
+      }
+      else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+         break;
+      }
+      else if(ev.type == ALLEGRO_EVENT_MOUSE_AXES ||
+              ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY) {
+		Bee1.KeepTrack(ev.mouse.x, ev.mouse.y);
+		Bee2.KeepTrack(ev.mouse.x, ev.mouse.y);
+		Bee3.KeepTrack(ev.mouse.x, ev.mouse.y);
+		Bee4.KeepTrack(ev.mouse.x, ev.mouse.y);
+        bouncer_x = ev.mouse.x;
+        bouncer_y = ev.mouse.y;
+      }
+      else if(ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
+          break;
+      }
+ 
+      if(redraw && al_is_event_queue_empty(event_queue)) {
+         redraw = false;
+
+         al_clear_to_color(al_map_rgb(0,0,0));
+		
+		 Bee1.Draw1();
+		 Bee2.Draw2();
+		 Bee3.Draw3();
+		 Bee4.Draw4();
+
+  al_flip_display();
+         
+      }
+   }
+ 
+   al_destroy_bitmap(bouncer);
+   al_destroy_timer(timer);
+   al_destroy_display(display);
+   al_destroy_event_queue(event_queue);
+ 
+   return 0;
+}
+void Bees::InitCircle(int X, int Y, int Rad, int R, int G, int B) {
+	Xpos = X;
+	Ypos = Y;
+	Radius = Rad;
+	ColorR = R;
+	ColorG = G;
+	ColorB = B;
+}
+void Bees::Draw1() {
+	int Rand1;
+	int Rand2;
+	int Room = 0;
+	al_draw_filled_circle(Xpos, Ypos, Radius, al_map_rgb(ColorR, ColorG, ColorB));
+
+	Rand1 = rand() % 100;
+	Rand2 = rand() % 100;
+	Xpos = MX + Rand1;
+	Ypos = MY + Rand2;
+}
+void Bees::Draw2() {
+	int Rand3;
+	int Rand4;
+	int Room = 0;
+	al_draw_filled_circle(Xpos, Ypos, Radius, al_map_rgb(ColorR, ColorG, ColorB));
+
+	Rand3 = rand() % 100;
+	Rand4 = rand() % 100;
+	Xpos = MX - Rand3;
+	Ypos = MY - Rand4;
+}
+void Bees::Draw3() {
+	int Rand5;
+	int Rand6;
+	int Room = 0;
+	al_draw_filled_circle(Xpos, Ypos, Radius, al_map_rgb(ColorR, ColorG, ColorB));
+
+	Rand5 = rand() % 100;
+	Rand6 = rand() % 100;
+	Xpos = MX + Rand5;
+	Ypos = MY - Rand6;
+}
+void Bees::Draw4() {
+	int Rand7;
+	int Rand8;
+	int Room = 0;
+	al_draw_filled_circle(Xpos, Ypos, Radius, al_map_rgb(ColorR, ColorG, ColorB));
+
+	Rand7 = rand() % 100;
+	Rand8 = rand() % 100;
+	Xpos = MX - Rand7;
+	Ypos = MY + Rand8;
+}
+void Bees::KeepTrack(int MouseX, int MouseY) {
+	MX = MouseX;
+	MY = MouseY;
+}
