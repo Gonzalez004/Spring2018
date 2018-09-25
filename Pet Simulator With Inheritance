@@ -1,0 +1,189 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+//Base class 
+class Pet
+{
+private:
+protected:
+	int hunger;
+	int cleanliness;
+	string name;
+public:
+	void feed();
+	void clean();
+	void printInfo();
+
+};
+
+// Sub class inheriting from Base Class(Pet) 
+class Dog : public Pet
+{
+private:
+	int boredom;
+	int needToPee;
+public:
+	void play();
+	void goOut();
+	void initDog(string n);
+	void printInfo();
+};
+
+class kitty : public Pet {
+private:
+	int hairball;
+	int lonliness;
+
+public:
+	void play();
+	void brush();
+	void initKitty(string n);
+	void printInfo();
+
+};
+class HedgeHog : public Pet {
+private:
+	int ShedSpikes;
+	int Sleepy;
+
+public:
+	void play();
+	void Curl();
+	void initHedgeHog(string n);
+	void printInfo();
+
+};
+class Horse : public Pet {
+private:
+	int Run;
+	int Dance;
+
+public:
+	void play();
+	void Music();
+	void initHorse(string n);
+	void printInfo();
+
+};
+
+
+//main function 
+int main()
+{
+
+	Dog Fido;
+	kitty CreamPuff;
+	HedgeHog Jorge;
+	Horse Fernando;
+
+	Fido.initDog("Fido");
+	CreamPuff.initKitty("Cream Puff");
+	Jorge.initHedgeHog("Jorge");
+	Fernando.initHorse("Fernando");
+
+	Fido.printInfo();
+	CreamPuff.printInfo();
+	Jorge.printInfo();
+	Fernando.printInfo();
+
+	// An object of class child has all data members 
+	// and member functions of class parent 
+
+
+	return 0;
+}
+/////////////////////////////////////////////////////////////////////////////////
+void Pet::feed() {
+	hunger -= rand() % 20;
+}
+void  Pet::clean() {
+	cleanliness -= rand() % 20;
+}
+void  Pet::printInfo() {
+	cout << "your pet " << name << " has a hunger level of " << hunger << " , and a cleanliness level of " << cleanliness << endl;
+}
+/////////////////////////////////////////////////////////////////////////////////
+void Dog::play() {
+	boredom -= rand() % 20;
+}
+void Dog::goOut() {
+	needToPee -= rand() % 20;
+
+}
+
+void Dog::initDog(string n) {
+	hunger = rand() % 100;
+	cleanliness = rand() % 100;
+	name = n;
+	boredom = rand() % 100;
+	needToPee = rand() % 100;
+}
+
+void  Dog::printInfo() {
+	cout << "your pet " << name << " has a hunger level of " << hunger << " , and a cleanliness level of " << cleanliness << endl;
+	cout << "their boredom level is " << boredom << " , and their need to pee is " << needToPee << endl;
+	cout << endl << endl;
+
+}
+/////////////////////////////////////////////////////////////////////////////////
+void kitty::play() {
+	lonliness -= rand() % 20;
+}
+void kitty::brush() {
+	hairball -= rand() % 20;
+}
+
+
+void kitty::initKitty(string n) {
+	hunger = rand() % 100;
+	cleanliness = rand() % 100;
+	name = n;
+	hairball = rand() % 100;
+	lonliness = rand() % 100;
+
+}
+
+void  kitty::printInfo() {
+	cout << "your pet " << name << " has a hunger level of " << hunger << " , and a cleanliness level of " << cleanliness << endl;
+	cout << "their hairball level is " << hairball << " , and their lonliness is " << lonliness << endl;
+	cout << endl << endl;
+}
+/////////////////////////////////////////////////////////////////////////////////
+void HedgeHog::play() {
+	Sleepy -= rand() % 20;
+}
+void HedgeHog::Curl() {
+	ShedSpikes -= rand() % 20;
+}
+void HedgeHog::initHedgeHog(string n) {
+	hunger = rand() % 100;
+	cleanliness = rand() % 100;
+	name = n;
+	Sleepy = rand() % 100;
+	ShedSpikes = rand() % 100;
+}
+void  HedgeHog::printInfo() {
+	cout << "your pet " << name << " has a hunger level of " << hunger << " , and a cleanliness level of " << cleanliness << endl;
+	cout << "their sleepy level is " << Sleepy << ", and their amount of spikes they have is " << ShedSpikes << endl;
+	cout << endl << endl;
+}
+/////////////////////////////////////////////////////////////////////////////////
+void Horse::play() {
+	Run -= rand() % 20;
+}
+void Horse::Music() {
+	Dance -= rand() % 20;
+}
+void Horse::initHorse(string n) {
+	hunger = rand() % 100;
+	cleanliness = rand() % 100;
+	name = n;
+	Run = rand() % 100;
+	Dance = rand() % 100;
+}
+void  Horse::printInfo() {
+	cout << "your pet " << name << " has a hunger level of " << hunger << " , and a cleanliness level of " << cleanliness << endl;
+	cout << "their need to play is " << Run << ", and their need to dance is " << Dance << endl;
+	cout << endl << endl;
+}
