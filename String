@@ -1,0 +1,17 @@
+#include <iostream>
+#include <string>
+using namespace std; 
+
+int main() {
+	string str = "It's a dangerous to go alone, take this!";
+
+	string str2 = str.substr(3, 5);
+
+	size_t pos = str.find("go");
+
+	string str3 = str.substr(pos);
+
+	cout << str2 << ' ' << str3 << endl;
+
+	return 0;
+}
