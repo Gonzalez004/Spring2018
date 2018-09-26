@@ -1,0 +1,69 @@
+#include <iostream>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+#include <ctime>
+using namespace std;
+int RandX;
+	int RandY;
+	int RandColor1;
+	int RandColor2;
+	int RandColor3;
+	float DotX = 0;
+	float DotY = 0;
+	const int Dot_Size = 1;
+int main() {
+	srand(time(NULL));
+	al_init();
+	al_init_primitives_addon();
+	
+	ALLEGRO_DISPLAY *Game_Window = NULL;
+
+	Game_Window = al_create_display(900, 900);
+
+	al_clear_to_color(al_map_rgb(0, 0, 0));
+	
+	while (1) {
+		ALLEGRO_EVENT ev;
+
+		RandX = rand() % 900;
+		RandY = rand() % 900;
+		RandColor1 = rand() % 250;
+		RandColor2 = rand() % 250;
+		RandColor3 = rand() % 250;
+	//	RandX > 100 & RandX < 200 & RandY > 200 & RandY < 600
+		//RandX > 200 & RandX < 300 & RandY > 400 & RandY < 500
+		//RandX > 300 & RandX < 400 & RandY > 200 & RandY < 600
+		//RandX > 500 & RandX < 600 & RandY > 200 & RandY < 600
+		if (RandX > 100 & RandX < 200 & RandY > 200 & RandY < 600) {
+			RandX = rand() % 900;
+			RandY = rand() % 900;
+		}
+		else if (RandX > 200 & RandX < 300 & RandY > 400 & RandY < 500) {
+			RandX = rand() % 900;
+			RandY = rand() % 900;
+
+		}
+		else if (RandX > 300 & RandX < 400 & RandY > 200 & RandY < 600) {
+			RandX = rand() % 900;
+			RandY = rand() % 900;
+
+		}
+		else if (RandX > 500 & RandX < 600 & RandY > 200 & RandY < 600) {
+			RandX = rand() % 900;
+			RandY = rand() % 900;
+
+		}
+		else (
+		//al_draw_filled_rectangle(RandX, RandY, RandX + 1, RandY + 1, al_map_rgb(RandColor1, RandColor2, RandColor3));
+		al_draw_filled_rectangle(RandX, RandY, RandX + 1, RandY + 1, al_map_rgb(RandColor1, RandColor1, RandColor1)));
+		
+	//	al_draw_filled_rectangle(RandX, RandY, RandX+1, RandY +1, al_map_rgb(RandColor1, RandColor1, RandColor1));
+		//al_draw_filled_rectangle(RandX, RandY, RandX + 1, RandY + 1, al_map_rgb(RandColor1, RandColor2, RandColor3));
+			//al_draw_filled_circle(a, b, c, al_map_rgb(d, e, f));
+		//al_draw_triangle(u, v, w, x, y, z, al_map_rgb(a1, b1, c1), d1);
+
+		al_flip_display();
+	}
+	al_destroy_display(Game_Window);
+	return 0;
+}
