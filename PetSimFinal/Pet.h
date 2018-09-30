@@ -22,7 +22,9 @@ public:
 	void Bathroom(); //PeepPoop
 	void Medicine();//Health
 	void PrintInfo();
-	void Restrictions(); 
+	void Restrictions();
+	void GoDown();
+	void Die();
 };
 
 // Sub class inheriting from Base Class(Pet) 
@@ -39,23 +41,23 @@ private:
 
 public:
 
-	void InitKitty(string N);
-	void PrintInfo();
+void InitKitty(string N);
+void PrintInfo();
 
 };
 class HedgeHog : public Pet {
 private:
 
 public:
-	void InitHedgeHog(string N);
-	void PrintInfo();
+void InitHedgeHog(string N);
+void PrintInfo();
 
 };
 class Horse : public Pet {
 private:
 
 public:
-	void InitHorse(string N);
-	void PrintInfo();
+void InitHorse(string N);
+void PrintInfo();
 
 };*/
