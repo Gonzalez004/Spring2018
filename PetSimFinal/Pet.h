@@ -9,11 +9,13 @@ private:
 protected:
 	int Hunger; //Feed
 	int Bored; //Play
-	int Cleanliness; //Clean
+	int Dirty; //Clean
 	int Thirst; //Water
 	int PeepPoop; //Bathroom
 	int Health;//Medicine
 	string Name;
+	int Decision;//All Go Down Functions
+	double HighScore = 0;
 public:
 	void Feed(); //Hunger
 	void Play(); //Bored
@@ -23,7 +25,11 @@ public:
 	void Medicine();//Health
 	void PrintInfo();
 	void Restrictions();
-	void GoDown();
+	void GoDownHunger();
+	void GoDownBored();
+	void GoDownDirty();
+	void GoDownThirst();
+	void GoDownPeepPoop();
 	void Die();
 };
 
@@ -33,7 +39,7 @@ private:
 
 public:
 	void InitDog(string N);
-	void PrintInfo();
+//	void PrintInfo();
 };
 
 /*class kitty : public Pet {
