@@ -1,189 +1,124 @@
+#include <iostream>
+#include <string>
+#include <ctime>
 #include "Pet.h"
-/////////////////////////////////////////////////////////////////////////////////
-void Pet::Feed() {
-	HighScore =HighScore+1;
-	Hunger -= rand() % 20;
-}
-void  Pet::Play() {
-	HighScore = HighScore + 1;
-	Bored -= rand() % 20;
-}
-void  Pet::Clean() {
-	HighScore = HighScore + 1;
-	Dirty -= rand() % 20;
-}
-void  Pet::Water() {
-	HighScore = HighScore + 1;
-	Thirst -= rand() % 20;
-}
-void  Pet::Bathroom() {
-	HighScore = HighScore + 1;
-	PeepPoop -= rand() % 20;
-}
-void  Pet::Medicine() {
-	HighScore = HighScore + 1;
-	Health += rand() % 20;
-}
-void  Pet::PrintInfo() {
-	cout << "Your pet " << Name << "'s stats:" << endl;
-	cout << "The hunger level is " << Hunger << endl;
-	cout << "The boredness level is " << Bored << endl;
-	cout << "The dirty level is " << Dirty << endl;
-	cout << "The thirst level is " << Thirst << endl;
-	cout << "The need to go to the bathroom is " << PeepPoop << endl;
-	cout << "The overall health of your pet is " << Health << endl;
-}
-void Pet::Restrictions() {
-	////////////////////
-	if (Hunger < 0) {
-		Hunger = 0;
-	}
-	if (Hunger > 100) {
-		Hunger = 100;
-	}
-	////////////////////
-	if (Bored < 0) {
-		Bored = 0;
-	}
-	if (Bored > 100) {
-		Bored = 100;
-	}
-	////////////////////
-	if (Dirty < 0) {
-		Dirty = 0;
-	}
-	if (Dirty > 100) {
-		Dirty = 100;
-	}
-	////////////////////
-	if (Thirst < 0) {
-		Thirst = 0;
-	}
-	if (Thirst > 100) {
-		Thirst = 100;
-	}
-	////////////////////
-	if (PeepPoop < 0) {
-		PeepPoop = 0;
-	}
-	if (PeepPoop > 100) {
-		PeepPoop = 100;
-	}
-	////////////////////
-	if (Health < 0) {
-		Health = 0;
-	}
-	if (Health > 100) {
-		Health = 100;
-	}
-}
-////////////////////
-void Pet::GoDownHunger() {
-	Decision = rand() % 2;
-	if (Decision == 0) {
-		Hunger += rand() % 10;
-	}
-}
-////////////////////
-void Pet::GoDownBored() {
-	Decision = rand() % 2;
-	if (Decision == 0) {
-		Bored += rand() % 10;
-	}
-}
-////////////////////
-void Pet::GoDownDirty() {
-	Decision = rand() % 2;
-	if (Decision == 0) {
-		Dirty += rand() % 10;
-	}
-}
-////////////////////
-void Pet::GoDownThirst() {
-	Decision = rand() % 2;
-	if (Decision == 0) {
-		Thirst += rand() % 10;
-	}
-}
-////////////////////
-void Pet::GoDownPeepPoop() {
-	Decision = rand() % 2;
-	if (Decision == 0) {
-		PeepPoop += rand() % 10;
-	}
-}
-void Pet::Die() {
-	////////////////////
-	if (Hunger > 90) {
-		Health -= 20;
-	}
-	else if (Hunger < 90 && Hunger > 50) {
-		Health -= 10;
-	}
-	else if (Hunger < 50 && Hunger > 25) {
-		Health -= 5;
-	}
-	////////////////////
-	if (Bored > 90) {
-		Health -= 5;
-	}
-	else if (Bored < 90 && Bored > 50) {
-		Health -= 2;
-	}
-	else if (Bored < 50 && Bored > 25) {
-		Health -= 1;
-	}
-	////////////////////
-	if (Dirty > 90) {
-		Health -= 10;
-	}
-	else if (Dirty < 80 && Dirty > 50) {
-		Health -= 5;
-	}
-	else if (Dirty < 50 && Dirty > 25) {
-		Health -= 2;
-	}
-	////////////////////
-	if (Thirst > 90) {
-		Health -= 20;
-	}
-	else if (Thirst < 90 && Thirst > 50) {
-		Health -= 5;
-	}
-	else if (Thirst < 50 && Thirst > 25) {
-		Health -= 2;
-	}
-	////////////////////
-	if (PeepPoop > 90) {
-		Health -= 5;
-	}
-	else if (PeepPoop < 90 && PeepPoop > 50) {
-		Health -= 2;
-	}
-	else if (PeepPoop < 50 && PeepPoop > 25) {
-		Health -= 1;
-	}
-	////////////////////
-	if (Health < 0 || Health == 0) {
-		cout << "Your Pet Health Reached Under 0" << endl;
-		cout << "Your highscore is " << HighScore << endl;
-		cout << "Game Over" << endl;
-		system("pause");
-		exit(0);
-	}
-	////////////////////
-}
+using namespace std;
+
+string ChoicePet;
+string PetName;
+string AreYouSureAnswer;
+string WhatTheyWantToDo;
+int PetType = 0;
+enum PetType { START, AreYouSure, DOG, CAT, HEDGEHOG, HORSE };
 
 
+int main() {
+	Dog Pet;
+	srand(time(NULL));
 
-/////////////////////////////////////////////////////////////////////////////////
-void Dog::InitDog(string N) {
-	Hunger = rand() % 10;
-	Bored = rand() % 10;
-	Dirty = rand() % 10;
-	Thirst = rand() % 10;
-	PeepPoop = rand() % 10;
-	Health = 90;
-	Name = N;
-}
-/////////////////////////////////////////////////////////////////////////////////
+	//cout << "Your pet " << Name << " Has been adpoted by you!" << endl;
+	//cout << "Coungraluation" << endl;
+	while (1) {
+		switch (PetType) {
+		case START:
+			cout << "Welcome to Pet Sim!" << endl;
+			cout << "What pet do you want?" << endl;
+			cout << "Dog(D)?" << endl;
+			getline(cin, ChoicePet);
+
+
+			if (ChoicePet.compare("Dog") == 0 || ChoicePet.compare("dog") == 0 || ChoicePet.compare("D") == 0 || ChoicePet.compare("d") == 0) {
+				cout << "What is the name of your Dog?" << endl;
+				getline(cin, PetName);
+				PetType = AreYouSure;
+			}
+			else {
+				cout << "Invalid" << endl;
+			}
+			break;
+		case AreYouSure:
+			cout << "Are you sure you want " << PetName << " as your pet?" << endl;
+			cout << "Yes or No?" << endl;
+			getline(cin, AreYouSureAnswer);
+			if (AreYouSureAnswer.compare("Yes") == 0 || AreYouSureAnswer.compare("yes") == 0 || AreYouSureAnswer.compare("Y") == 0 || AreYouSureAnswer.compare("y") == 0) {
+				PetType = DOG;
+				Pet.InitDog(PetName);
+			}
+			else if (AreYouSureAnswer.compare("No") == 0 || AreYouSureAnswer.compare("no") == 0 || AreYouSureAnswer.compare("N") == 0 || AreYouSureAnswer.compare("n") == 0) {
+				PetType = START;
+			}
+			else {
+				cout << "Invalid" << endl;
+			}
+			break;
+		case DOG:
+			Pet.PrintInfo();
+			cout << "What Do You want to do?" << endl;
+			cout << "Feed?" << endl;
+			cout << "Play?" << endl;
+			cout << "Clean?" << endl;
+			cout << "Water" << endl;
+			cout << "Bathroom?" << endl;
+			cout << "Medicine?" << endl;
+			getline(cin, WhatTheyWantToDo);
+			if (WhatTheyWantToDo.compare("Feed") == 0 || WhatTheyWantToDo.compare("feed") == 0 || WhatTheyWantToDo.compare("F") == 0 || WhatTheyWantToDo.compare("f") == 0) {
+				Pet.Feed();
+				Pet.Restrictions();
+
+				Pet.GoDownBored();
+				Pet.GoDownDirty();
+				Pet.GoDownThirst();
+				Pet.GoDownPeepPoop();
+				Pet.Die();
+			}
+			else if (WhatTheyWantToDo.compare("Play") == 0 || WhatTheyWantToDo.compare("play") == 0 || WhatTheyWantToDo.compare("P") == 0 || WhatTheyWantToDo.compare("p") == 0) {
+				Pet.Play();
+				Pet.Restrictions();
+				Pet.GoDownHunger();
+				Pet.GoDownDirty();
+				Pet.GoDownThirst();
+				Pet.GoDownPeepPoop();
+				Pet.Die();
+			}
+			else if (WhatTheyWantToDo.compare("Clean") == 0 || WhatTheyWantToDo.compare("clean") == 0 || WhatTheyWantToDo.compare("C") == 0 || WhatTheyWantToDo.compare("c") == 0) {
+				Pet.Clean();
+				Pet.Restrictions();
+				Pet.GoDownHunger();
+				Pet.GoDownBored();
+				Pet.GoDownThirst();
+				Pet.GoDownPeepPoop();
+				Pet.Die();
+			}
+			else if (WhatTheyWantToDo.compare("Water") == 0 || WhatTheyWantToDo.compare("water") == 0 || WhatTheyWantToDo.compare("W") == 0 || WhatTheyWantToDo.compare("w") == 0) {
+				Pet.Water();
+				Pet.Restrictions();
+				Pet.GoDownHunger();
+				Pet.GoDownBored();
+				Pet.GoDownDirty();
+				Pet.GoDownPeepPoop();
+				Pet.Die();
+			}
+			else if (WhatTheyWantToDo.compare("Bathroom") == 0 || WhatTheyWantToDo.compare("bathroom") == 0 || WhatTheyWantToDo.compare("B") == 0 || WhatTheyWantToDo.compare("b") == 0) {
+				Pet.Bathroom();
+				Pet.Restrictions();
+				Pet.GoDownHunger();
+				Pet.GoDownBored();
+				Pet.GoDownDirty();
+				Pet.GoDownThirst();
+				Pet.Die();
+			}
+			else if (WhatTheyWantToDo.compare("Medicine") == 0 || WhatTheyWantToDo.compare("medicine") == 0 || WhatTheyWantToDo.compare("M") == 0 || WhatTheyWantToDo.compare("m") == 0 ) {
+				Pet.Medicine();
+				Pet.Restrictions();
+				Pet.Die();
+			}
+			else {
+				cout << "Invalid" << endl;
+			}
+			cout << "=================================================================================" << endl;
+			//system("pause");
+			break;
+		}//Switch
+	}//while
+	return 0;
+}//Main
