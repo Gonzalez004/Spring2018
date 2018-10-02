@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+double SlopeCalc(int X1, int Y1, int X2, int Y2);
+double input1;
+double input2;
+double input3;
+double input4;
+int main() {
+	cout << "Enter your first point" << endl;
+	cin >> input1;
+	cout << "Enter your second point" << endl;
+	cin >> input2;
+	cout << "Enter your third point" << endl;
+	cin >> input3;
+	cout << "Enter your forth point" << endl;
+	cin >> input4;
+
+	cout << SlopeCalc(input1, input2, input3, input4) << endl;
+	
+	system("pause");
+
+	return 0;
+}
+double SlopeCalc(int X1, int Y1, int X2, int Y2) {
+	double SlopeY = (Y2 - Y1);
+	double SlopeX = (X2 - X1);
+	double Slope = (SlopeY / SlopeX);
+	return Slope;
+
+	
+}
